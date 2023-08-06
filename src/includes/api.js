@@ -8,7 +8,8 @@ const endpoints = {
   login: '/auth/login',
 
   //Authenticated endpoints
-  addPost: '/posts'
+  addPost: '/posts',
+  getCategories: '/categories'
 }
 
 export const api = {
@@ -51,6 +52,16 @@ export const api = {
 
       return instance
         .post(endpoints.addPost, data, this.headers())
+        .then((response) => {
+          return response.data
+        })
+        .catch((error) => {
+          throw error
+        })
+    },
+    categories() {
+      return instance
+        .get(endpoints.getCategories, this.headers())
         .then((response) => {
           return response.data
         })

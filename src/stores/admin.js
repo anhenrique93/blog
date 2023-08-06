@@ -3,7 +3,10 @@ import { api } from '../includes/api'
 
 export default defineStore('admin', {
   state: () => ({
-    isLoggedIn: false
+    isLoggedIn: false,
+    categories: 'teste',
+    tags: '',
+    networks: ''
   }),
   actions: {
     async authenticate(values) {
@@ -13,6 +16,11 @@ export default defineStore('admin', {
 
       //Armazenar token
       localStorage.setItem('token', response.token)
+    },
+    async getCategories() {
+      const response = await api.authenticatedRequest.categories()
+
+      this.categories = response
     }
   }
 })
