@@ -92,7 +92,8 @@ export default {
       }
 
       this.login_loader = false
-    }
+    },
+
   }
 }
 </script>

@@ -4,7 +4,7 @@ import { api } from '../includes/api'
 export default defineStore('admin', {
   state: () => ({
     isLoggedIn: false,
-    categories: 'teste',
+    categories: [],
     tags: '',
     networks: ''
   }),
@@ -17,10 +17,22 @@ export default defineStore('admin', {
       //Armazenar token
       localStorage.setItem('token', response.token)
     },
-    async getCategories() {
-      const response = await api.authenticatedRequest.categories()
-
+    async getCategories(token) {
+      const response = await api.authenticatedRequest.categories(token)
       this.categories = response
-    }
+    },
+    async getTags(token) {
+      const response = await api.authenticatedRequest.tags(token)
+      this.tags = response
+    },
+    async getNetworks(token) {
+      const response = await api.authenticatedRequest.networks(token)
+      this.networks = response
+    },
+
+    //ADD
+    async addPost(token, values) {
+      await api.authenticatedRequest.addPost(token, values)
+    }    
   }
 })

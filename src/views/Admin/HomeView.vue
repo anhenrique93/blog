@@ -1,10 +1,9 @@
 <template>
   <template v-if="this.adminStore.isLoggedIn">
-    <div class="flex">
+    <div class="flex bg-slate-900">
       <AdminPanel @admin-logout="logout" @chosen-option="showComponent" />
-      <div class="flex-1 mx-20 p-5">
+      <div class="flex-1 mx-20 p-5 bg-slate-900">
         <!-- Paginas aqui!!! -->
-
         <!-- POSTS -->
         <NewPost v-show="renderComponent === 'New Post'" />
         <RemovePost v-show="renderComponent === 'Delete Post'" />
@@ -36,6 +35,7 @@
 import AdminPanel from '../../components/Admin/AdminPanel.vue'
 import AdminAuth from '../../components/Admin/AdminAuth.vue'
 import { mapStores } from 'pinia'
+import { mapActions } from 'pinia'
 import useAdminStore from '../../stores/admin'
 
 //POSTS
@@ -77,20 +77,22 @@ export default {
   },
   data() {
     return {
-      renderComponent: ''
+      renderComponent: '',
     }
   },
   computed: {
-    ...mapStores(useAdminStore)
+    ...mapStores(useAdminStore),
   },
   beforeMount() {
     const token = localStorage.getItem('token')
 
     if (token) {
       this.adminStore.isLoggedIn = true
+      this.getAdminContents(token)
     }
   },
   methods: {
+    ...mapActions(useAdminStore, ['getCategories']),
     logout() {
       const token = localStorage.getItem('token')
 
@@ -101,6 +103,11 @@ export default {
     },
     showComponent(option) {
       this.renderComponent = option
+    },
+    async getAdminContents(token) {
+      await this.adminStore.getCategories(token)
+      await this.adminStore.getTags(token)
+      await this.adminStore.getNetworks(token)
     }
   }
 }

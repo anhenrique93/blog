@@ -6,10 +6,16 @@ const instance = axios.create({
 
 const endpoints = {
   login: '/auth/login',
+  getPosts: '/posts',
 
   //Authenticated endpoints
+  //POST
   addPost: '/posts',
-  getCategories: '/categories'
+  
+  //GET
+  getCategories: '/categories',
+  getTags: '/tags',
+  getNetworks: '/networks'
 }
 
 export const api = {
@@ -37,21 +43,39 @@ export const api = {
       return headers
     },
 
-    addPost(postData) {
+    addPost(postData, token) {
       const data = {
-        pt_title: postData.pt_title,
-        en_title: postData.en_title,
-        pt_excerpt: postData.pt_excerpt,
-        en_excerpt: postData.en_excerpt,
-        pt_body: postData.pt_body,
-        author: postData.author,
-        date: postData.date,
-        category_ids: postData.categories,
-        tag_ids: postData.tag_ids
+        "post": {
+          pt_title: postData.pt_title,
+          en_title: postData.en_title,
+          pt_excerpt: postData.pt_excerpt,
+          en_excerpt: postData.en_excerpt,
+          pt_body: postData.pt_body,
+          en_body: postData.en_body,
+          author: postData.author,
+          date: postData.date,
+          category_ids: postData.categories,
+          tag_ids: postData.tags
+        }
       }
 
       return instance
-        .post(endpoints.addPost, data, this.headers())
+        .post(endpoints.addPost, data, {
+            headers: { "Authorization" : `Bearer ${token}` }
+        })
+        .then((response) => {
+          alert("Post adicionado com sucesso!")
+          return response.data
+        })
+        .catch((error) => {
+          alert(error)  
+        })
+    },
+    categories(token) {
+      return instance
+        .get(endpoints.getCategories, {
+          headers: { "Authorization" : `Bearer ${token}` }
+        })
         .then((response) => {
           return response.data
         })
@@ -59,9 +83,23 @@ export const api = {
           throw error
         })
     },
-    categories() {
+    tags(token) {
       return instance
-        .get(endpoints.getCategories, this.headers())
+        .get(endpoints.getTags, {
+          headers: { "Authorization" : `Bearer ${token}` }
+        })
+        .then((response) => {
+          return response.data
+        })
+        .catch((error) => {
+          throw error
+        })
+    },
+    networks(token) {
+      return instance
+        .get(endpoints.getNetworks, {
+          headers: { "Authorization" : `Bearer ${token}` }
+        })
         .then((response) => {
           return response.data
         })
