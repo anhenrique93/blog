@@ -32,7 +32,12 @@ export default defineStore('admin', {
 
     //ADD
     async addPost(token, values) {
-      await api.authenticatedRequest.addPost(token, values)
-    }    
+      return await api.authenticatedRequest.addPost(token, values)
+    },
+
+    //Edit
+    async updatePost(values, id, token) {
+      return await api.authenticatedRequest.updatePost(values, token, id)
+    }
   }
 })
