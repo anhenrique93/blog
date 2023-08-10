@@ -21,10 +21,24 @@ const endpoints = {
   updateCategory: (id) => `/categories/${id}`,
   deleteCategory: (id) => `/categories/${id}`,
 
+  //TAGS
+  addTag: '/tags',
+  updateTag: (id) => `/tags/${id}`,
+  deleteTag: (id) => `/tags/${id}`,
+
+  //Netowork
+  addNetwork: '/networks',
+  updateNetwork: (id) => `/networks/${id}`,
+  deleteNetwork: (id) => `/networks/${id}`,
+
+  //PROFILES
+  updateProfile: (id) => `/profiles/${id}`,
+
   //OTHERS
   getCategories: '/categories',
   getTags: '/tags',
-  getNetworks: '/networks'
+  getNetworks: '/networks',
+  getProfiles: '/profiles'
 }
 
 export const api = {
@@ -78,6 +92,7 @@ export const api = {
       })
   },
 
+  //PROTECTED ROUTES
   authenticatedRequest: {
     headers() {
       const token = localStorage.getItem('token')
@@ -195,7 +210,7 @@ export const api = {
       const data = {
         category: {
           pt_name: categoryData.pt_name,
-          en_name: categoryData.pt_name
+          en_name: categoryData.en_name
         }
       }
 
@@ -238,6 +253,57 @@ export const api = {
         })
     },
 
+    addTag(tagData, token) {
+      const data = {
+        tag: {
+          name: tagData.name,
+        }
+      }
+
+      return instance
+        .post(endpoints.addTag, data, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        .then((response) => {
+          return JSON.stringify(response.data, null, 2)
+        })
+        .catch((error) => {
+          return JSON.stringify(error.response.data, null, 2)
+        })
+    },
+
+    updateTag(tagData, token, tagId) {
+      const data = {
+        tag: {
+          name: tagData.pt_name,
+        }
+      }
+
+      return instance
+        .patch(endpoints.updateTag(tagId), data, {
+          headers: { Authorization: `Bearer: ${token}` }
+        })
+        .then((response) => {
+          return JSON.stringify(response.data, null, 2)
+        })
+        .catch((error) => {
+          return JSON.stringify(error.response.data, null, 2)
+        })
+    },
+
+    deleteTag(token, tagId) {
+      return instance
+        .delete(endpoints.deleteTag(tagId), {
+          headers: { Authorization: `Bearer: ${token}` }
+        })
+        .then((response) => {
+          return JSON.stringify(response.data, null, 2)
+        })
+        .catch((error) => {
+          return JSON.stringify(error.response.data, null, 2)
+        })
+    },
+
     //NETWORKS
     networks(token) {
       return instance
@@ -250,6 +316,77 @@ export const api = {
         .catch((error) => {
           throw error
         })
-    }
+    },
+
+    addNetwork(networkData, token) {
+      const data = {
+        network: {
+          name: networkData.name,
+          url: networkData.url
+        }
+      }
+
+      return instance
+        .post(endpoints.addNetwork, data, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        .then((response) => {
+          return JSON.stringify(response.data, null, 2)
+        })
+        .catch((error) => {
+          return JSON.stringify(error.response.data, null, 2)
+        })
+    },
+
+    deleteNetwork(token, networkId) {
+      return instance
+        .delete(endpoints.deleteNetwork(networkId), {
+          headers: { Authorization: `Bearer: ${token}` }
+        })
+        .then((response) => {
+          return JSON.stringify(response.data, null, 2)
+        })
+        .catch((error) => {
+          return JSON.stringify(error.response.data, null, 2)
+        })
+    },
+
+    //Profiles
+    profiles(token) {
+      return instance
+        .get(endpoints.getProfiles, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        .then((response) => {
+          return response.data
+        })
+        .catch((error) => {
+          throw error
+        })
+    },
+
+    updateProfile(profileData, token, profileId) {
+      const data = {
+        profile: {
+          name: profileData.name,
+          last_name: profileData.last_name,
+          email: profileData.email,
+          image: profileData.image,
+          pt_description: profileData.pt_description,
+          en_description: profileData.en_description,
+        }
+      }
+
+      return instance
+        .patch(endpoints.updateProfile(profileId), data, {
+          headers: { Authorization: `Bearer: ${token}` }
+        })
+        .then((response) => {
+          return JSON.stringify(response.data, null, 2)
+        })
+        .catch((error) => {
+          return JSON.stringify(error.response.data, null, 2)
+        })
+    },
   }
 }

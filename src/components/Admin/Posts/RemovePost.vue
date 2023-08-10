@@ -55,7 +55,8 @@ export default {
     }
   },
   async beforeMount() {
-    this.posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+    const posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+    this.posts = posts
   },
   methods: {
     async loadPosts(moreOrLess) {
@@ -78,8 +79,16 @@ export default {
         this.selectedPost.id
       )
       if (response) {
+        
+        const posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+        
+        if (posts) {
+          this.posts = posts
+        }
+
         alert(`Post id:${this.selectedPost.id} title: ${this.selectedPost.pt_title} removed!`)
-      }
+      
+      } 
     }
   }
 }

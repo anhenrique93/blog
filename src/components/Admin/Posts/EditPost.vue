@@ -49,7 +49,7 @@
           />
         </div>
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <input
+          <textarea
             v-model="pt_excerpt"
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
             type="text"
@@ -58,7 +58,7 @@
           <p class="text-red-500 text-xs italic">Please fill out this field.</p>
         </div>
         <div class="w-full md:w-1/2 px-3">
-          <input
+          <textarea
             v-model="en_excerpt"
             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             id="grid-last-name"
@@ -318,11 +318,22 @@ export default {
         postId,
         localStorage.getItem('token')
       )
+
+      const posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+
+      if (posts) {
+        this.posts = posts
+      }
+
       alert(response)
     }
   },
   async beforeMount() {
-    this.posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+    const posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+
+    if (posts) {
+      this.posts = posts
+    }
   }
 }
 </script>

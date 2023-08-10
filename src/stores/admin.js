@@ -6,12 +6,12 @@ export default defineStore('admin', {
     isLoggedIn: false,
     categories: [],
     tags: '',
-    networks: ''
+    networks: '',
+    profiles: ''
   }),
   actions: {
     async authenticate(values) {
       const response = await api.login(values.email, values.password)
-
       this.isLoggedIn = true
 
       //Armazenar token
@@ -29,6 +29,10 @@ export default defineStore('admin', {
       const response = await api.authenticatedRequest.networks(token)
       this.networks = response
     },
+    async getProfiles(token) {
+      const response = await api.authenticatedRequest.profiles(token)
+      this.profiles = response
+    },
 
     //ADD
     async addPost(token, values) {
@@ -38,6 +42,11 @@ export default defineStore('admin', {
     //Edit
     async updatePost(values, id, token) {
       return await api.authenticatedRequest.updatePost(values, token, id)
-    }
+    },
+
+    //Profile
+    async updateProfile(values, id, token) {
+      return await api.authenticatedRequest.updateProfile(values, token, id)
+    },
   }
 })

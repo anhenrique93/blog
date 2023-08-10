@@ -76,7 +76,12 @@ export default {
     }
   },
   async beforeMount() {
-    this.categories = await api.authenticatedRequest.categories(localStorage.getItem('token'))
+    
+    const categories = await api.authenticatedRequest.categories(localStorage.getItem('token'))
+    if (categories) {
+      this.categories = categories
+    }
+    
   }
 }
 </script>

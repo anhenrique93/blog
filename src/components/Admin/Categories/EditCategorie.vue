@@ -88,14 +88,22 @@ export default {
       )
       if (response) {
         alert(
-          `name: ${this.selectedCategory.pt_name} changed successfully to: ${categoryContent.pt_name}`
+          `name: ${this.selectedCategory.pt_name} and ${this.selectedCategory.en_name} changed successfully to: 
+            ${categoryContent.pt_name} and ${categoryContent.en_name}`
         )
       }
       this.categories = await api.authenticatedRequest.categories(localStorage.getItem('token'))
     }
   },
   async beforeMount() {
-    this.categories = await api.authenticatedRequest.categories(localStorage.getItem('token'))
+    
+    const categories = await api.authenticatedRequest.categories(localStorage.getItem('token'))
+    
+    if (categories) {
+      this.categories = categories
+    }
+    
+    
   }
 }
 </script>

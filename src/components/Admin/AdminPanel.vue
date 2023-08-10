@@ -1,5 +1,8 @@
 <template>
   <aside class="bg-gray-800 text-white w-64 h-screen flex flex-col">
+    <!-- HOME -->
+    <MenuButton :name="panelOptions.home.name" @click="onClickOption(panelOptions.home.name)" />
+    
     <!-- Posts -->
     <MenuButton :name="panelOptions.posts.name" @click="showOptions(panelOptions.posts.name)" />
     <SubMenuButton
@@ -77,6 +80,7 @@
       :name="panelOptions.networks.delete"
       @click="onClickOption(panelOptions.networks.delete)"
     />
+    <MenuButton :name="panelOptions.perfil.name" @click="onClickOption(panelOptions.perfil.name)" />
   </aside>
 </template>
 
@@ -93,6 +97,12 @@ export default {
   data() {
     return {
       panelOptions: {
+        home: {
+          name: 'Home'
+        },
+        perfil: {
+          name: 'Perfil'
+        },
         posts: {
           name: 'Posts',
           add: 'New Post',
@@ -141,6 +151,8 @@ export default {
     },
     onClickOption(option) {
       const optionMap = {
+        [this.panelOptions.perfil.name]: 'Perfil',
+        [this.panelOptions.home.name]: 'Home',
         [this.panelOptions.posts.add]: 'New Post',
         [this.panelOptions.posts.update]: 'Edit Post',
         [this.panelOptions.posts.delete]: 'Delete Post',
