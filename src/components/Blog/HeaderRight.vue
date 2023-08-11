@@ -1,21 +1,18 @@
 <template>
-    <ul class="text-white">
+    <ul class="text-white space-y-3 flex flex-col items-end">
         <SocialNetworks />
-        <ChangeColorTheme />
         <ChangeLanguage />
     </ul>
 </template>
 
 <script>
 import SocialNetworks from './SocialNetworks.vue';
-import ChangeColorTheme from './ChangeColorTheme.vue';
 import ChangeLanguage from './ChangeLanguage.vue';
 
 export default {
     name: 'HeaderRight',
     components: {
         SocialNetworks,
-        ChangeColorTheme,
         ChangeLanguage
     }
 }

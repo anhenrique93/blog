@@ -122,8 +122,7 @@ export default {
       alert(response)
     },
     async getProfileData() {
-      const token = localStorage.getItem('token')
-      const profiles = await api.authenticatedRequest.profiles(token)
+      const profiles = await api.profiles()
       const myProfile = profiles[0]
       this.name = myProfile.name
       this.last_name = myProfile.last_name

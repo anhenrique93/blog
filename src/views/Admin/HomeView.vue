@@ -154,7 +154,7 @@ export default {
       const token = localStorage.getItem('token')
       await this.getAdminContents(token);
 
-      const profiles = await api.authenticatedRequest.profiles(token)
+      const profiles = await api.profiles()
 
       this.profile = profiles[0]
       this.isReceivingImage = false;

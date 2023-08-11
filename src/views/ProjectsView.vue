@@ -1,9 +1,16 @@
 <template>
-    <h1 class="text-black">Projects view</h1>
+    <div>
+        <UserInfo />
+    </div>
 </template>
 
 <script>
-export default {
+import UserInfo from '../components/Blog/UserInfo.vue';
 
+export default {
+    name: "ProjectsView",
+    components: {
+        UserInfo
+    }
 }
 </script>

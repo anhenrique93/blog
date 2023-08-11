@@ -58,6 +58,18 @@ export const api = {
       })
   },
 
+  //Profiles
+  profiles() {
+    return instance
+      .get(endpoints.getProfiles)
+      .then((response) => {
+        return response.data
+      })
+      .catch((error) => {
+        throw error
+      })
+  },
+
   //POSTS
   getAllPosts() {
     return instance
@@ -348,20 +360,6 @@ export const api = {
         })
         .catch((error) => {
           return JSON.stringify(error.response.data, null, 2)
-        })
-    },
-
-    //Profiles
-    profiles(token) {
-      return instance
-        .get(endpoints.getProfiles, {
-          headers: { Authorization: `Bearer ${token}` }
-        })
-        .then((response) => {
-          return response.data
-        })
-        .catch((error) => {
-          throw error
         })
     },
 

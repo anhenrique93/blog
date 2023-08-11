@@ -1,13 +1,15 @@
 <template>
     <ul>
-        <HeaderItem :url="options.about.url" :name="options.about.name" />
-        <HeaderItem :url="options.projects.url" :name="options.projects.name" />
-        <HeaderItem :url="options.experience.url" :name="options.experience.name" />
+        <HeaderItem :url="options.about.url" :name="headerNames.about" />
+        <HeaderItem :url="options.projects.url" :name="headerNames.projects" />
+        <HeaderItem :url="options.experience.url" :name="headerNames.experience" />
     </ul>
 </template>
 
 <script>
 import HeaderItem from './HeaderItem.vue';
+import useLanguageStore from '../../stores/language'
+import { mapStores } from 'pinia';
 
 export default {
     name: "HeaderBlog",
@@ -18,17 +20,24 @@ export default {
         return {
             options: {
                 projects: {
-                    name: 'Projects',
                     url: '/'
                 },
                 about: {
-                    name: 'About',
                     url: '/about'
                 },
                 experience: {
-                    name: 'Experience',
                     url: '/experience'
                 }
+            }
+        }
+    },
+    computed: {
+        ...mapStores(useLanguageStore),
+        headerNames() {
+            if (this.languageStore.atual === 'en') {
+                return this.languageStore.header.en
+            } else {
+                return this.languageStore.header.pt
             }
         }
     } 

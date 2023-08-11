@@ -1,7 +1,7 @@
 <template>
     <li>
         <router-link :to="url" class="group flex items-center py-3">
-            <span class="
+            <span :class="`
                 nav-indicator 
                 mr-4 
                 h-px w-8 
@@ -11,14 +11,14 @@
               group-hover:bg-secundary_white 
                 group-focus-visible:w-16 
               group-focus-visible:bg-secundary_white 
-                motion-reduce:transition-none">
+                motion-reduce:transition-none`">
             </span>
-            <span class="
+            <span :class="`
                 nav-text text-sm
                 font-bold uppercase 
                 tracking-widest text-slate-400
                 group-hover:font-bold group-hover:text-text_white 
-                group-focus-visible:font-bold" 
+                group-focus-visible:font-bold`" 
             > 
                 {{ name }}
         </span>
@@ -29,14 +29,6 @@
 <script>
 export default {
     name: "HeaderItem",
-    props: ['name','url'],
-    methods: {
-        encreaseElementSize() {
-            console.log("isHover")
-        },
-        decreaseElementSize() {
-            console.log("isNotHover")
-        }
-    }
+    props: ['name','url']
 }
 </script>
