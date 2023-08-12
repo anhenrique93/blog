@@ -9,6 +9,20 @@
             lg:py-0
             ">
             <!-- HEADER LEFT-SIDE -->
+            <div class="
+                grid-cols-1 
+                grid-rows-1 
+                absolute
+                ml-5
+                sm:block
+                md:block
+                lg:hidden
+                xl:hidden
+                2xl:hidden
+
+            ">
+                <MobileHeader />
+            </div>
             <div class="row-span-5 pt-24 hidden lg:block">
                 <HeaderBlog/>
             </div>
@@ -27,7 +41,7 @@
                 2xl:col-span-3 2xl:pt-24                
                 "
             >
-                <RouterView />
+                <RouterView class="flex flex-col items-center space-y-12" />
             </div>
             <!-- HEADER RIGHT-SIDE -->
             <div class="col-start-5 row-span-5 flex-col pt-24 hidden lg:block">
@@ -42,12 +56,14 @@ import HeaderBlog from '../components/Blog/HeaderBlog.vue';
 import HeaderRight from '../components/Blog/HeaderRight.vue';
 import { mapActions } from 'pinia'
 import useUserStore from '../stores/user'
+import MobileHeader from '../components/Blog/mobile/MobileHeader.vue';
 
 export default {
     name: 'IndexView',
     components: {
         HeaderBlog,
-        HeaderRight
+        HeaderRight,
+        MobileHeader
     },
     mounted() {
         this.fetchUsersProfiles()

@@ -2,7 +2,7 @@
     <div class="
         overflow-hidden 
         bg-black 
-        w-32 h-32
+        w-28 h-28
         sm:w-32 sm:h-32
         md:w-32 md:h-32
         lg:w-32 lg:h-32

@@ -13,6 +13,7 @@ module.exports = {
       },
       backgroundColor: {
         primary_dark: '#18181b',
+        hover_dark: '#3b3b40',
         secundary_white: '#d1d5db',
         box_primary_dark: '#3f3f46',
         box_secundary_white: '#9ca3af',
