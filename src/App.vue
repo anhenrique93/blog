@@ -1,9 +1,9 @@
-  <template>
-    <RouterView class="font-roboto" />
-  </template>
+<template>
+  <RouterView />
+</template>
 
 <script>
-  export default {
-    name: 'App',
-  }
+export default {
+  name: 'App'
+}
 </script>

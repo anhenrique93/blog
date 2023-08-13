@@ -5,12 +5,11 @@ export default defineStore('user', {
   state: () => ({
     users: [],
     user: {},
-    isLoading: false
+    isLoading: true
   }),
 
   actions: {
     async getUsersProfiles() {
-      this.isLoading = true
       const users = await api.profiles()
 
       if (users) {
@@ -22,26 +21,19 @@ export default defineStore('user', {
   },
   getters: {
     myUser() {
-      if (this.isLoading) {
-        return this.isLoading
-      } else {
+      if (!this.isLoading) {
         return this.user
       }
     },
 
     myNetworks() {
-      if (this.isLoading) {
-        return this.isLoading
-      } else {
-        const networks = this.user.networks
-        return networks
+      if (!this.isLoading) {
+        return this.user.networks
       }
     },
 
     myInfo() {
-      if (this.isLoading) {
-        return this.isLoading
-      } else {
+      if (!this.isLoading) {
         const myInfo = {
           name: this.user.name,
           last_name: this.user.last_name,
@@ -55,9 +47,7 @@ export default defineStore('user', {
     },
 
     myPhoto() {
-      if (this.isLoading) {
-        return this.isLoading
-      } else {
+      if (!this.isLoading) {
         return this.user.image
       }
     }

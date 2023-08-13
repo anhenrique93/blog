@@ -268,7 +268,7 @@ export const api = {
     addTag(tagData, token) {
       const data = {
         tag: {
-          name: tagData.name,
+          name: tagData.name
         }
       }
 
@@ -287,7 +287,7 @@ export const api = {
     updateTag(tagData, token, tagId) {
       const data = {
         tag: {
-          name: tagData.pt_name,
+          name: tagData.pt_name
         }
       }
 
@@ -326,6 +326,7 @@ export const api = {
           return response.data
         })
         .catch((error) => {
+          console.log(error)
           throw error
         })
     },
@@ -371,7 +372,7 @@ export const api = {
           email: profileData.email,
           image: profileData.image,
           pt_description: profileData.pt_description,
-          en_description: profileData.en_description,
+          en_description: profileData.en_description
         }
       }
 
@@ -385,6 +386,6 @@ export const api = {
         .catch((error) => {
           return JSON.stringify(error.response.data, null, 2)
         })
-    },
+    }
   }
 }

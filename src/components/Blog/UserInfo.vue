@@ -1,9 +1,6 @@
 <template>
-  <div
-    v-if="isLoading"
-    class="flex flex-col space-y-3 2xl:flex-row 2xl:space-y-0 xl:flex-row xl:space-y-0 lg:flex-row lg:space-y-0 md:flex-col md:space-y-3 sm:flex-col sd:space-y-3 items-center"
-  >
-    <LoadingIcon size="5" />
+  <div v-if="isLoading">
+    <LoadingPerfil />
   </div>
   <div
     v-else
@@ -29,13 +26,13 @@ import PerfilImage from './global/PerfilImage.vue'
 import useUserStore from '../../stores/user'
 import useLanguageStore from '../../stores/language'
 import { mapStores } from 'pinia'
-import LoadingIcon from './global/LoadingIcon.vue'
+import LoadingPerfil from './blogPost/LoadingPerfil.vue'
 
 export default {
   name: 'UserInfo',
   components: {
     PerfilImage,
-    LoadingIcon
+    LoadingPerfil
   },
   computed: {
     ...mapStores(useUserStore),

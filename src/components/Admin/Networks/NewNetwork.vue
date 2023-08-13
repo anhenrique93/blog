@@ -76,13 +76,11 @@ export default {
     }
   },
   async beforeMount() {
-    
     const networks = await api.authenticatedRequest.networks(localStorage.getItem('token'))
-    
+
     if (networks) {
-      this.networks = networks;
+      this.networks = networks
     }
-    
   }
 }
 </script>
