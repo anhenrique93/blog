@@ -6,6 +6,13 @@
   </div>
   <div v-else v-for="project in projects" :key="project" class="mb-12">
     <ProjectResume :project="project" />
+    <div class="text-text_white">
+      <p>clientHeight: {{ clientHeight }}</p>
+      <p>scrollHeight: {{ scrollHeight }}</p>
+      <p>clientTop: {{ scrollTop }}</p>
+      <p>clientTop: {{ scrollTop }}</p>
+      <p>isOnBottom?: {{ isOnBottomPositon }}</p>
+    </div>
   </div>
 </template>
 
@@ -24,7 +31,10 @@ export default {
     return {
       postsPerPage: 4,
       loadingProjcts: Array(6),
-      isOnBottomPositon: false
+      isOnBottomPositon: false,
+      clientHeight: '',
+      scrollHeight: '',
+      scrollTop: ''
     }
   },
   computed: {
@@ -43,8 +53,11 @@ export default {
     },
     handleScroll() {
       const clientHeight = document.documentElement.clientHeight
+      this.clientHeight = clientHeight
       const scrollHeight = document.documentElement.scrollHeight
+      this.scrollHeight = scrollHeight
       const scrollTop = window.scrollY
+      this.scrollTop = scrollTop
 
       if (scrollTop + clientHeight >= scrollHeight) {
         this.isOnBottomPositon = true
