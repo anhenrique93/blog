@@ -6,9 +6,6 @@
   </div>
   <div v-else v-for="project in projects" :key="project" class="mb-12">
     <ProjectResume :project="project" />
-    <div class="text-text_white">
-      <p>isOnBottom?: {{ isOnBottomPositon }}</p>
-    </div>
   </div>
 </template>
 
@@ -55,19 +52,6 @@ export default {
       } else {
         this.isOnBottomPositon = false
       }
-
-      /*
-      const clientHeight = document.documentElement.clientHeight
-      const scrollHeight = document.documentElement.scrollHeight
-      const scrollTop = window.scrollY
-      this.scrollTop = scrollTop
-
-      if (scrollTop + clientHeight >= scrollHeight) {
-        this.isOnBottomPositon = true
-      } else {
-        this.isOnBottomPositon = false
-      }
-      */
     }
   },
   mounted() {
