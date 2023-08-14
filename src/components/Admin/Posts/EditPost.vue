@@ -241,7 +241,7 @@ export default {
         this.page--
       }
       this.isLoading = true
-      this.posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+      this.posts = await api.getPostsPerPageAdmin(this.page, this.postsPerPage)
       this.isLoading = false
     },
     getMarkdownTextPt(text) {
@@ -319,7 +319,7 @@ export default {
         localStorage.getItem('token')
       )
 
-      const posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+      const posts = await api.getPostsPerPageAdmin(this.page, this.postsPerPage)
 
       if (posts) {
         this.posts = posts
@@ -329,7 +329,7 @@ export default {
     }
   },
   async beforeMount() {
-    const posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+    const posts = await api.getPostsPerPageAdmin(this.page, this.postsPerPage)
 
     if (posts) {
       this.posts = posts

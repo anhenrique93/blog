@@ -6,9 +6,8 @@ const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      //Projects
       path: '/',
-      name: 'projects',
+      name: 'index',
       component: IndexView,
       children: [
         {
@@ -16,13 +15,22 @@ const router = createRouter({
           component: ProjectsView
         },
         {
-          path: '/about',
+          path: '/projects/:id',
+          component: () => import('../components/Blog/blogPost/IndividualProject.vue'),
+          props: true
+        },
+        {
+          path: '/contacts/:id',
+          component: () => import('../components/Blog/blogPost/IndividualProject.vue')
+        },
+        {
+          path: '/about/:id',
           component: () => import('../views/AboutView.vue')
         },
         {
-          path: '/experience',
+          path: '/experience/:id',
           component: () => import('../views/ExperienceView.vue')
-        } 
+        }
       ]
     },
     // ADMIN

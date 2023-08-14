@@ -55,7 +55,7 @@ export default {
     }
   },
   async beforeMount() {
-    const posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+    const posts = await api.getPostsPerPageAdmin(this.page, this.postsPerPage)
     this.posts = posts
   },
   methods: {
@@ -67,7 +67,7 @@ export default {
         this.page--
       }
       this.isLoading = true
-      this.posts = await api.getPostsPerPage(this.page, this.postsPerPage)
+      this.posts = await api.getPostsPerPageAdmin(this.page, this.postsPerPage)
       this.isLoading = false
     },
     getPost(post) {
@@ -79,16 +79,14 @@ export default {
         this.selectedPost.id
       )
       if (response) {
-        
-        const posts = await api.getPostsPerPage(this.page, this.postsPerPage)
-        
+        const posts = await api.getPostsPerPageAdmin(this.page, this.postsPerPage)
+
         if (posts) {
           this.posts = posts
         }
 
         alert(`Post id:${this.selectedPost.id} title: ${this.selectedPost.pt_title} removed!`)
-      
-      } 
+      }
     }
   }
 }

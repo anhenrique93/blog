@@ -1,5 +1,5 @@
 <template>
-  <ul class="text-white space-y-3 flex flex-col items-end">
+  <ul class="text-white space-y-3 flex flex-col items-end pl-20">
     <SocialNetworks />
     <ChangeLanguage />
   </ul>

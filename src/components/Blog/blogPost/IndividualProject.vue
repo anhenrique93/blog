@@ -10,17 +10,14 @@
 </template>
 
 <script>
-import LoadingProject from '../components/Blog/blogPost/LoadingProject.vue'
+import { api } from '../../../includes/api'
 import MarkdownIt from 'markdown-it'
-import useLanguageStore from '../stores/language'
+import useLanguageStore from '../../../stores/language'
 import { mapStores } from 'pinia'
-import { api } from '../includes/api'
+import LoadingProject from '../../Blog/blogPost/LoadingProject.vue'
 
 export default {
-  name: 'ExperienceView',
-  components: {
-    LoadingProject
-  },
+  name: 'IndividualProject',
   data() {
     return {
       post: {},
@@ -29,6 +26,9 @@ export default {
       isLoading: false,
       markdownRenderer: new MarkdownIt()
     }
+  },
+  components: {
+    LoadingProject
   },
   computed: {
     ...mapStores(useLanguageStore),
@@ -48,11 +48,6 @@ export default {
       this.isLoading = true
       const postId = this.$route.params.id
       this.post = await api.getPostById(postId)
-
-      if (this.post.message) {
-        this.loadPost()
-      }
-
       this.postPtBody = this.post.pt_body
       this.postEnBody = this.post.en_body
       this.isLoading = false

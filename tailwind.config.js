@@ -3,13 +3,41 @@ module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      typography: {
+        DEFAULT: {
+          css: {
+            color: '#d4d4d8',
+            h1: {
+              color: '#d4d4d8'
+            },
+            h2: {
+              color: '#d4d4d8'
+            },
+            h3: {
+              color: '#d4d4d8'
+            },
+            p: {
+              color: '#d4d4d8'
+            },
+            strong: {
+              color: '#d4d4d8'
+            },
+            a: {
+              color: '#656ceb',
+              '&:hover': {
+                color: '#434acc'
+              }
+            }
+          }
+        }
+      },
       fontFamily: {
-        roboto: ['Roboto', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif']
       },
       colors: {
         text_white: '#d4d4d8',
         text_black: '#18181b',
-        link: '#71717a',
+        link: '#71717a'
       },
       backgroundColor: {
         primary_dark: '#18181b',
@@ -21,9 +49,9 @@ module.exports = {
         box_m_primary_secundary: '#6b7280'
       },
       objectPosition: {
-        'center-bottom': 'center bottom',
+        'center-bottom': 'center bottom'
       }
     }
   },
-  plugins: [require('@tailwindcss/forms')]
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')]
 }

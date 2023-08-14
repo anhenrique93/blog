@@ -14,12 +14,24 @@ const endpoints = {
   deletePost: (id) => `/posts/${id}`,
   getLastPosts: (numberOfPosts) => `/posts/${numberOfPosts}`,
   getPostsPerPage: (pageNumber, postsPerPage) =>
+    `/categories/20/posts?page=${pageNumber}&per_page=${postsPerPage}`,
+  getPostsPerPageAdmin: (pageNumber, postsPerPage) =>
     `/posts?page=${pageNumber}&per_page=${postsPerPage}`,
+  getPostById: (id) => `/posts/${id}`,
 
   //CATEGORY
   addCategory: '/categories',
   updateCategory: (id) => `/categories/${id}`,
   deleteCategory: (id) => `/categories/${id}`,
+
+  //CONTACTS
+  getContactPost: '/categories/21/posts',
+
+  //ABOUT
+  getAboutPost: '/categories/22/posts',
+
+  //EXPERIENCE
+  getExperiencePost: '/categories/23/posts',
 
   //TAGS
   addTag: '/tags',
@@ -66,7 +78,7 @@ export const api = {
         return response.data
       })
       .catch((error) => {
-        throw error
+        return error
       })
   },
 
@@ -78,6 +90,7 @@ export const api = {
         return response.data
       })
       .catch((error) => {
+        this.getAllPosts()
         throw error
       })
   },
@@ -100,7 +113,62 @@ export const api = {
         return response.data
       })
       .catch((error) => {
+        return error
+      })
+  },
+
+  getPostsPerPageAdmin(pageNumber, postsPerPage) {
+    return instance
+      .get(endpoints.getPostsPerPageAdmin(pageNumber, postsPerPage))
+      .then((response) => {
+        return response.data
+      })
+      .catch((error) => {
         throw error
+      })
+  },
+
+  getPostById(postId) {
+    return instance
+      .get(endpoints.getPostById(postId))
+      .then((response) => {
+        return response.data
+      })
+      .catch((error) => {
+        throw error
+      })
+  },
+
+  getContactPost() {
+    return instance
+      .get(endpoints.getContactPost)
+      .then((response) => {
+        return response.data[0]
+      })
+      .catch((error) => {
+        return error
+      })
+  },
+
+  getAboutPost() {
+    return instance
+      .get(endpoints.getAboutPost)
+      .then((response) => {
+        return response.data[0]
+      })
+      .catch((error) => {
+        return error
+      })
+  },
+
+  getExperiencePost() {
+    return instance
+      .get(endpoints.getExperiencePost)
+      .then((response) => {
+        return response.data[0]
+      })
+      .catch((error) => {
+        return error
       })
   },
 

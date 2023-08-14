@@ -17,15 +17,14 @@ import useProjectsStore from '../../../stores/projects'
 
 export default {
   name: 'ProjectsResumeContainer',
-  props: ['isOnBottomPositon'],
   components: {
     ProjectResume
   },
   data() {
     return {
       postsPerPage: 4,
-      atualPage: 1,
-      loadingProjcts: Array(6)
+      loadingProjcts: Array(6),
+      isOnBottomPositon: false
     }
   },
   computed: {
@@ -40,17 +39,31 @@ export default {
   methods: {
     ...mapActions(useProjectsStore, ['fetchProjectsPerPage']),
     async projectsPerPage() {
-      await this.fetchProjectsPerPage(this.atualPage, this.postsPerPage)
+      await this.fetchProjectsPerPage(this.postsPerPage)
+    },
+    handleScroll() {
+      const clientHeight = document.documentElement.clientHeight
+      const scrollHeight = document.documentElement.scrollHeight
+      const scrollTop = window.scrollY
+
+      if (scrollTop + clientHeight >= scrollHeight) {
+        this.isOnBottomPositon = true
+      } else {
+        this.isOnBottomPositon = false
+      }
     }
   },
   mounted() {
-    this.projectsPerPage()
+    if (!this.projectsStore.getProjects) {
+      this.projectsPerPage()
+    }
+
+    window.addEventListener('scroll', this.handleScroll)
   },
   watch: {
     async isOnBottomPositon(value) {
-      if (value) {
-        this.atualPage = this.atualPage + 1
-        await this.fetchProjectsPerPage(this.atualPage, this.postsPerPage)
+      if (value && !this.projectsStore.allProjectsAreFetched) {
+        await this.fetchProjectsPerPage(this.postsPerPage)
       }
     }
   },

@@ -10,6 +10,7 @@
 import HeaderItem from './HeaderItem.vue'
 import useLanguageStore from '../../stores/language'
 import { mapStores } from 'pinia'
+import { api } from '../../includes/api'
 
 export default {
   name: 'HeaderBlog',
@@ -23,10 +24,10 @@ export default {
           url: '/'
         },
         about: {
-          url: '/about'
+          url: '/'
         },
         experience: {
-          url: '/experience'
+          url: '/'
         }
       }
     }
@@ -38,6 +39,36 @@ export default {
         return this.languageStore.header.en
       } else {
         return this.languageStore.header.pt
+      }
+    }
+  },
+  mounted() {
+    this.getAboutPost()
+    this.getExperience()
+  },
+  methods: {
+    async getAboutPost() {
+      const post = await api.getAboutPost()
+
+      if (post.id) {
+        this.options.about.url = `/about/${post.id}`
+      }
+
+      if (post.message) {
+        this.getAboutPost()
+        this.getExperience()
+      }
+    },
+    async getExperience() {
+      const post = await api.getExperiencePost()
+
+      if (post.id) {
+        this.options.experience.url = `/experience/${post.id}`
+      }
+
+      if (post.message) {
+        this.getAboutPost()
+        this.getExperience()
       }
     }
   }

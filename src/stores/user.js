@@ -17,6 +17,11 @@ export default defineStore('user', {
         this.user = users[0]
         this.isLoading = false
       }
+
+      if (this.users.message) {
+        this.getUsersProfiles()
+        this.isLoading = false
+      }
     }
   },
   getters: {
@@ -27,7 +32,7 @@ export default defineStore('user', {
     },
 
     myNetworks() {
-      if (!this.isLoading) {
+      if (!this.isLoading && this.user.networks) {
         return this.user.networks
       }
     },
